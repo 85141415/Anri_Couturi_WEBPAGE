@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="AC.png" type="image/png">
+    <title>Produktseite</title>
+    <style>
+        /* Grundlegende Stile */
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        html, body {
+            overflow-y: scroll; /* Scrollen (y) ermöglichen */
+            overflow-x: hidden; /* Nur horizontales Scrollen verhindern */
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            color: black;
+            background-color: #F9F9F9;
+        }
+
+        /* Header-Styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: rgb(0, 0, 0); /* Schwarzer Hintergrund */
+            position: fixed;
+            width: 100%; /* Vollständige Breite */
+            top: 0;
+            z-index: 10;
+            color: white;
+            box-sizing: border-box; /* Box-Sizing für Padding berücksichtigen */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 20px; /* Abstand zur Scrollbar */
+        }
+        nav .left-nav, nav .right-nav {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+        }
+        nav .left-nav {
+            margin-right: auto;
+        }
+        nav .right-nav {
+            margin-left: auto;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .logo img {
+            height: 35px; /* Logo-Größe */
+        }
+
+        /* Produktcontainer */
+        .product-container {
+            display: flex;
+            justify-content: center; /* Horizontale Zentrierung */
+            align-items: flex-start; /* Flex-start für die vertikale Ausrichtung */
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px;
+            padding-top: 120px; /* Abstand zum Header */
+            margin: 0 auto; /* Zentriert den Container */
+        }
+        .product-content {
+            display: flex; /* Flexbox für Bild und Details */
+            gap: 20px; /* Abstand zwischen Bild und Details */
+            width: 90%; /* Maximale Breite */
+            justify-content: center; /* Zentriert die Inhalte */
+        }
+        .product-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .product-image img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: solid 1px black;
+        }
+        .product-details {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left; /* Links ausrichten */
+        }
+        .product-title, .product-price, .product-description {
+            font-size: 1rem;
+            color: black;
+        }
+        .add-to-cart {
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart:hover {
+            background-color: #555;
+        }
+
+        /* Footer-Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            color: white;
+            position: fixed;
+            bottom: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="AC.png" alt="Logo"> <!-- Logo-Datei -->
+        </div>
+        <nav>
+            <ul class="left-nav">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#collection">COLLECTION</a></li>
+                <li><a href="#news">NEWS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+            <ul class="right-nav">
+                <li><a href="#la maison">LA MAISON</a></li>
+                <li><a href="#storefinder">STORES</a></li>
+                <li><a href="#customer_service">SERVICES</a></li>
+                <li><a href="#login">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="product-container" id="product-container">
+        <div class="product-content">
+            <div class="product-image">
+                <img id="product-image" src="" alt="Produktbild">
+            </div>
+            <div class="product-details">
+                <h1 id="product-title" class="product-title"></h1>
+                <p id="product-price" class="product-price"></p>
+                <p id="product-description" class="product-description"></p>
+                <div class="add-to-cart">In den Warenkorb</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 AC. Alle Rechte vorbehalten.</p>
+    </footer>    
+
+    <script>
+        // Funktion für die Produktdetails
+        async function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+            if (!productId) {
+                document.getElementById('product-container').innerHTML = "<p>Produkt nicht gefunden</p>";
+                return;
+            }
+            try {
+                const response = await fetch('Product-databank.json');
+                const data = await response.json();
+                const product = data.products.find(p => p.id === productId);
+                if (!product) {
+                    document.getElementById('product-container').innerHTML = "<p>Produkt nicht gefunden</p>";
+                    return;
+                }
+                document.getElementById('product-image').src = product.image;
+                document.getElementById('product-title').textContent = product.name;
+                document.getElementById('product-price').textContent = product.price;
+                document.getElementById('product-description').textContent = product.description;
+            } catch (error) {
+                console.error("Fehler beim Laden der Produktdaten:", error);
+                document.getElementById('product-container').innerHTML = "<p>Fehler beim Laden der Produktdaten</p>";
+            }
+        }
+
+        window.onload = loadProduct;
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "Jackett",
+            "price": "2 890 €",
+            "description": "Luxuriöses Jackett aus feinster Wolle mit schlanker Passform.",
+            "image": "Piece1.png"
+        },
+        {
+            "id": "2",
+            "name": "90'S Hose",
+            "price": "1 390 €",
+            "description": "Eine moderne Hose im Stil der 90er Jahre, perfekt für legere Anlässe.",
+            "image": "Piece2.png"
+        },
+        {
+            "id": "3",
+            "name": "JEAN Derbys",
+            "price": "895 €",
+            "description": "Elegante Derbys für jeden Anlass.",
+            "image": "Piece3.png"
+        }
+    ]
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="AC.png" type="image/png">
+    <title>FW24 | Anri Couturi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: black;
+            background-image: url('Background (Anri Couturi)2 Collection.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Zwischen den Navigatoren und dem Logo */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0); /* Transparent */
+            position: fixed; /* Fixierte Position für den Header */
+            width: 100%; /* Full width */
+            z-index: 10; /* Header immer oben */
+            top: 0; /* Header an den oberen Rand anpassen */
+            transition: color 0.3s; /* Transition for text color */
+        }
+        header.black-text nav ul li a {
+            color: black; /* Textfarbe schwarz */
+        }
+        header.black-text .logo img {
+            content: url('AC-black.png'); /* Neues Logo für schwarze Schriftfarbe */
+            transition: content 0.3s; /* Smooth transition */
+        }
+        nav {
+            display: flex;
+            justify-content: space-between; /* Platzierung der Navigationen */
+            width: 100%;
+        }
+
+        nav .left-nav, nav .right-nav {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav .left-nav {
+            margin-right: auto; /* Linke Navigation nach links schieben */
+        }
+
+        nav .right-nav {
+            margin-left: auto; /* Rechte Navigation nach rechts schieben */
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white; /* Initial color */
+            font-size: 0.75rem;
+            font-weight: 400;
+            transition: color 0.3s; /* Transition for text color */
+        }
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Zentriert das Logo */
+        }
+
+        .logo img {
+            height: 35px; /* Höhe des Logos anpassen */
+        }
+
+        .products-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 40px;
+            margin-top: 60px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(250px, 1fr));
+            gap: 60px;
+            width: 80%;
+            max-width: 1000px;
+        }
+        
+        .product {
+            position: relative;
+            background-color: #D9CAB3;
+            padding: 15px;
+            padding-bottom: 30px;
+            padding-top: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1rem;
+        }
+
+        .product img {
+            max-width: 100%;
+            border-radius: 0px;
+            border: 1px solid black; /* Dünne schwarze Umrandung */
+        }
+
+        /* Info-Overlay für Name und Preis */
+        .info-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-name {
+            color: rgb(0, 0, 0);
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .product-price {
+            color: rgb(0, 0, 0);
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+
+        /* Hover-Effekt nur für die Textüberlagerung */
+        .product:hover .info-overlay {
+            opacity: 1;
+        }
+        footer {
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0);
+            position: relative;
+            width: calc(100% - 40px); /* Anpassung der Breite */
+            margin: 0 auto; /* Zentriert den Footer-Inhalt */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="AC.png" alt="Logo">
+    </div>
+    <nav>
+        <ul class="left-nav">
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#collection">COLLECTION</a></li>
+            <li><a href="#news">NEWS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+        <ul class="right-nav">
+            <li><a href="#la maison">LA MAISON</a></li>
+            <li><a href="#storefinder">STORES</a></li>
+            <li><a href="#customer_service">SERVICES</a></li>
+            <li><a href="#login">LOGIN</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="products-container">
+    <div class="products">
+        <!-- Produkte in einer mittigen 3x3 Struktur -->
+        <a class="product" href="Product-page.html?id=1">
+            <img src="Piece1.png" alt="Produkt 1">
+            <div class="info-overlay">
+                <span class="product-name">Jackett</span>
+                <span class="product-price">│ 2 890 €</span>
+            </div>
+        </a>
+        <a class="product" href="Product-page.html?id=2">
+            <img src="Piece2.png" alt="Produkt 2">
+            <div class="info-overlay">
+                <span class="product-name">90'S Hose</span>
+                <span class="product-price">│ 1 390 €</span>
+            </div>
+        </a>
+        <a class="product" href="Product-page.html?id=3">
+            <img src="Piece3.png" alt="Produkt 3">
+            <div class="info-overlay">
+                <span class="product-name">JEAN Derbys</span>
+                <span class="product-price">│ 895 €</span>
+            </div>
+        </a>
+        <a class="product" href="produktseite4.html">
+            <img src="Piece4.png" alt="Produkt 4">
+            <div class="info-overlay">
+                <span class="product-name">Kurzer Mantel</span>
+                <span class="product-price">│ 3 990 €</span>
+            </div>
+        </a>
+        <a class="product" href="produktseite5.html">
+            <img src="Piece5.png" alt="Produkt 5">
+            <div class="info-overlay">
+                <span class="product-name">CASSANDRE Hemd</span>
+                <span class="product-price">│ 850 €</span>
+            </div>
+        </a>
+        <a class="product" href="produktseite6.html">
+            <img src="Piece6.png" alt="Produkt 6">
+            <div class="info-overlay">
+                <span class="product-name">Breite Krawatte</span>
+                <span class="product-price">│ 235 €</span>
+            </div>
+        </a>
+        <a class="product" href="produktseite7.html">
+            <img src="Piece7.png" alt="Produkt 7">
+            <div class="info-overlay">
+                <span class="product-name">Jackett</span>
+                <span class="product-price">│ 2 490 €</span>
+            </div>
+        </a>
+        <a class="product" href="produktseite8.html">
+            <img src="Piece8.png" alt="Produkt 8">
+            <div class="info-overlay">
+                <span class="product-name">Hose</span>
+                <span class="product-price">│ 1 090 €</span>
+            </div>
+        </a>
+        <a class="product" href="produktseite9.html">
+            <img src="Piece9.png" alt="Produkt 9">
+            <div class="info-overlay">
+                <span class="product-name">rechteckige Manschettenknöpfe</span>
+                <span class="product-price">│ 295 €</span>
+            </div>
+        </a>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 AC. All rights reserved.</p>
+</footer>
+</body>
+</html>
